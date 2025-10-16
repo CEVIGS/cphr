@@ -4,6 +4,11 @@ Frequency analysis
 
 
 def get_frequencies(text: str) -> dict[str, int]:
+    """
+    Counts the number of occurrences of each unique character in the text.
+    :param text: String to count chars in
+    :return: A dictionary mapping each unique character to its frequency
+    """
     ret = {}
     for char in text:
         if char in ret:
@@ -14,6 +19,11 @@ def get_frequencies(text: str) -> dict[str, int]:
 
 
 def get_relative_freqs(text: str) -> dict[str, float]:
+    """
+    Get the relative frequencies of each character in the text, i.e. the sum of all relative frequencies is 1.
+    :param text: String to count chars in.
+    :return: Relative frequencies of each character relative to the text.
+    """
     return {char: count / len(text) for char, count in get_frequencies(text).items()}
 
 
