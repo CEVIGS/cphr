@@ -158,3 +158,9 @@ def get_letter_deviation(text: str, expected_frequencies: Optional[dict[str, flo
         average_deviation += abs(relative_frequencies.get(char, 0) - expected_freq)
 
     return average_deviation / len(expected_frequencies)
+
+def get_closest_freq(freq: float, expected_frequencies: Optional[dict[str, float]] = None) -> str:
+    if expected_frequencies is None:
+        expected_frequencies = LETTER_FREQS
+
+    return min(expected_frequencies, key=lambda k: abs(freq - expected_frequencies[k]))
