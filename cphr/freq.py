@@ -1,16 +1,21 @@
 """
 Frequency analysis
 """
+from typing import Optional
 
 
-def get_frequencies(text: str) -> dict[str, int]:
+def get_frequencies(text: str, allowed_chars: Optional[str] = None) -> dict[str, int]:
     """
     Counts the number of occurrences of each unique character in the text.
     :param text: String to count chars in
+    :param allowed_chars: Whitelist of chars to count
     :return: A dictionary mapping each unique character to its frequency
     """
     ret = {}
     for char in text:
+        if allowed_chars is not None and char not in allowed_chars:
+            continue
+
         if char in ret:
             ret[char] += 1
         else:
@@ -18,117 +23,138 @@ def get_frequencies(text: str) -> dict[str, int]:
     return ret
 
 
-def get_relative_freqs(text: str) -> dict[str, float]:
+def get_relative_freqs(text: str, allowed_chars: Optional[str] = None) -> dict[str, float]:
     """
     Get the relative frequencies of each character in the text, i.e. the sum of all relative frequencies is 1.
     :param text: String to count chars in.
+    :param allowed_chars: Whitelist of chars to check from
     :return: Relative frequencies of each character relative to the text.
     """
-    return {char: count / len(text) for char, count in get_frequencies(text).items()}
+    return {char: count / len(text) for char, count in get_frequencies(text, allowed_chars).items()}
 
 
 # https://mathcenter.oxford.emory.edu/site/math125/englishLetterFreqs/
 LETTER_FREQS = {
-    'a': 0.08167,
-    'b': 0.01492,
-    'c': 0.02782,
-    'd': 0.04253,
-    'e': 0.12702,
-    'f': 0.02228,
-    'g': 0.02015,
-    'h': 0.06094,
-    'i': 0.06966,
-    'j': 0.00153,
-    'k': 0.00772,
-    'l': 0.04025,
-    'm': 0.02406,
-    'n': 0.06749,
-    'o': 0.07507,
-    'p': 0.01929,
-    'q': 0.00095,
-    'r': 0.05987,
-    's': 0.06327,
-    't': 0.09056,
-    'u': 0.02758,
-    'v': 0.00978,
-    'w': 0.02360,
-    'x': 0.00150,
-    'y': 0.01974,
-    'z': 0.00074
+    'A': 0.08167,
+    'B': 0.01492,
+    'C': 0.02782,
+    'D': 0.04253,
+    'E': 0.12702,
+    'F': 0.02228,
+    'G': 0.02015,
+    'H': 0.06094,
+    'I': 0.06966,
+    'J': 0.00153,
+    'K': 0.00772,
+    'L': 0.04025,
+    'M': 0.02406,
+    'N': 0.06749,
+    'O': 0.07507,
+    'P': 0.01929,
+    'Q': 0.00095,
+    'R': 0.05987,
+    'S': 0.06327,
+    'T': 0.09056,
+    'U': 0.02758,
+    'V': 0.00978,
+    'W': 0.02360,
+    'X': 0.00150,
+    'Y': 0.01974,
+    'Z': 0.00074
 }
 
 LETTER_FREQS_STARTING_WORDS = {
-    't': 0.1594,
-    'a': 0.155,
-    'i': 0.0823,
-    's': 0.0775,
-    'o': 0.0712,
-    'c': 0.0597,
-    'm': 0.0426,
-    'f': 0.0408,
-    'p': 0.040,
-    'w': 0.0382
+    'T': 0.1594,
+    'A': 0.155,
+    'I': 0.0823,
+    'S': 0.0775,
+    'O': 0.0712,
+    'C': 0.0597,
+    'M': 0.0426,
+    'F': 0.0408,
+    'P': 0.040,
+    'W': 0.0382
 }
 LETTER_FREQS_ENDING_WORDS = {
-    'e': 0.1917,
-    's': 0.1435,
-    'd': 0.0923,
-    't': 0.0864,
-    'n': 0.0786,
-    'y': 0.0730,
-    'r': 0.0693,
-    'o': 0.0467,
-    'l': 0.0456,
-    'f': 0.0408
+    'E': 0.1917,
+    'S': 0.1435,
+    'D': 0.0923,
+    'T': 0.0864,
+    'N': 0.0786,
+    'Y': 0.0730,
+    'R': 0.0693,
+    'O': 0.0467,
+    'L': 0.0456,
+    'F': 0.0408
 }
 
 # in order
 MOST_COMMON_BIGRAMS = [
-    'th',
-    'he',
-    'in',
-    'en',
-    'nt',
-    're',
-    'er',
-    'an',
-    'ti',
-    'es',
-    'on',
-    'at',
-    'se',
-    'nd',
-    'or',
-    'ar',
-    'al',
-    'te',
-    'co',
-    'de',
-    'to',
-    'ra',
-    'et',
-    'ed',
-    'it',
-    'sa',
-    'em',
-    'ro'
+    'TH',
+    'HE',
+    'IN',
+    'EN',
+    'NT',
+    'RE',
+    'ER',
+    'AN',
+    'TI',
+    'ES',
+    'ON',
+    'AT',
+    'SE',
+    'ND',
+    'OR',
+    'AR',
+    'AL',
+    'TE',
+    'CO',
+    'DE',
+    'TO',
+    'RA',
+    'ET',
+    'ED',
+    'IT',
+    'SA',
+    'EM',
+    'RO'
 ]
 # in order
 MOST_COMMON_TRIGRAMS = [
-    'the',
-    'and',
-    'tha',
-    'ent',
-    'ing',
-    'ion',
-    'tio',
-    'for',
-    'nde',
-    'has',
-    'nce',
-    'edt',
-    'tis',
-    'oft',
-    'sth',
-    'men'
+    'THE',
+    'AND',
+    'THA',
+    'ENT',
+    'ING',
+    'ION',
+    'TIO',
+    'FOR',
+    'NDE',
+    'HAS',
+    'NCE',
+    'EDT',
+    'TIS',
+    'OFT',
+    'STH',
+    'MEN'
 ]
+
+def get_letter_deviation(text: str, expected_frequencies: Optional[dict[str, float]] = None) -> float:
+    """
+    Get the average deviation of each character's relative frequency to its expected frequency.
+    :param text: String to compare relative frequencies to.
+    :param expected_frequencies: Dictionary mapping each unique character to its expected relative frequency
+    :return: The mean distance to the expected frequency.
+    """
+    if expected_frequencies is None:
+        expected_frequencies = LETTER_FREQS
+
+    allowed_chars = ''.join(expected_frequencies.keys())
+    relative_frequencies = get_relative_freqs(text, allowed_chars)
+    average_deviation = 0
+
+    # we will only check against frequencies in the expected frequencies.
+    for char, expected_freq in expected_frequencies.items():
+        average_deviation += abs(relative_frequencies.get(char, 0) - expected_freq)
+
+    return average_deviation / len(expected_frequencies)
