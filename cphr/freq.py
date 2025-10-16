@@ -13,6 +13,10 @@ def get_frequencies(text: str) -> dict[str, int]:
     return ret
 
 
+def get_relative_freqs(text: str) -> dict[str, float]:
+    return {char: count / len(text) for char, count in get_frequencies(text).items()}
+
+
 # https://mathcenter.oxford.emory.edu/site/math125/englishLetterFreqs/
 LETTER_FREQS = {
     'a': 0.08167,
