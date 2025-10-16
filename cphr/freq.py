@@ -164,3 +164,14 @@ def get_closest_freq(freq: float, expected_frequencies: Optional[dict[str, float
         expected_frequencies = LETTER_FREQS
 
     return min(expected_frequencies, key=lambda k: abs(freq - expected_frequencies[k]))
+
+# this doesn't seem to be very helpful
+def estimate_mapping(frequencies: dict[str, float], expected_frequencies: Optional[dict[str, float]] = None) -> dict[str, float]:
+    if expected_frequencies is None:
+        expected_frequencies = LETTER_FREQS
+
+    ret = {}
+    for char, freq in frequencies.items():
+        ret[char] = get_closest_freq(freq, expected_frequencies)
+
+    return ret
