@@ -99,3 +99,22 @@ MOST_COMMON_BIGRAMS = [
     'em',
     'ro'
 ]
+# in order
+MOST_COMMON_TRIGRAMS = [
+    'the',
+    'and',
+    'tha',
+    'ent',
+    'ing',
+    'ion',
+    'tio',
+    'for',
+    'nde',
+    'has',
+    'nce',
+    'edt',
+    'tis',
+    'oft',
+    'sth',
+    'men'
+]
