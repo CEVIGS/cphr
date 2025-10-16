@@ -10,7 +10,7 @@ for i in range(26):
     deviation = get_letter_deviation(result)
     results[result] = deviation
     print(deviation)
-    print(text)
+    print(result)
 
 print('-' * 30)
 print("Results")
