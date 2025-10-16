@@ -67,3 +67,35 @@ LETTER_FREQS_ENDING_WORDS = {
     'l': 0.0456,
     'f': 0.0408
 }
+
+# in order
+MOST_COMMON_BIGRAMS = [
+    'th',
+    'he',
+    'in',
+    'en',
+    'nt',
+    're',
+    'er',
+    'an',
+    'ti',
+    'es',
+    'on',
+    'at',
+    'se',
+    'nd',
+    'or',
+    'ar',
+    'al',
+    'te',
+    'co',
+    'de',
+    'to',
+    'ra',
+    'et',
+    'ed',
+    'it',
+    'sa',
+    'em',
+    'ro'
+]
